@@ -1,5 +1,5 @@
 node_modules
-demo.js
-hello.py
+demo.*
+hello.*
 package.json
 package-lock.json
