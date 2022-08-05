@@ -22,6 +22,18 @@ class Graph {
         this.adjacencyList[vertex1].add(vertex2)
         this.adjacencyList[vertex2].add(vertex1)
     }
+
+    print() {
+        console.log(this.adjacencyList)
+    }
+
+    printEdges(vertex: any) {
+        let val = ""
+        this.adjacencyList[vertex].forEach(edge => {
+            val += `${edge} `
+        })
+        console.log(val)
+    }
 }
 
 const graph = new Graph()
@@ -31,3 +43,6 @@ graph.addVertex('C')
 
 graph.addEdge('A', 'B')
 graph.addEdge('B', 'C')
+
+// graph.print()
+graph.printEdges('A')
