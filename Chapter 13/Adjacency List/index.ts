@@ -27,6 +27,34 @@ class Graph {
         console.log(this.adjacencyList)
     }
 
+    display() {
+        for (let vertex in this.adjacencyList) {
+            console.log(`${vertex} -> ${[...this.adjacencyList[vertex]]}`)
+        }
+    }
+
+    hasEdge(vertex1: string | number, vertex2: string | number) {
+        return (
+            this.adjacencyList[vertex1].has(vertex2) && this.adjacencyList[vertex2].has(vertex1)
+        )
+    }
+
+    removeEdge(vertex1: string | number, vertex2: string | number) {
+        if (this.hasEdge(vertex1, vertex2)) {
+            this.adjacencyList[vertex1].delete(vertex2)
+            this.adjacencyList[vertex2].delete(vertex1)
+        }
+    }
+
+    removeVertex(vertex: any) {
+        if (!this.adjacencyList[vertex]) return
+
+        for (let adjacentVertex of this.adjacencyList[vertex]) {
+            this.removeEdge(vertex, adjacentVertex)
+        }
+        delete this.adjacencyList[vertex]
+    }
+
     printEdges(vertex: any) {
         let val = ""
         this.adjacencyList[vertex].forEach(edge => {
@@ -45,4 +73,8 @@ graph.addEdge('A', 'B')
 graph.addEdge('B', 'C')
 
 // graph.print()
-graph.printEdges('A')
+// graph.display()
+// graph.printEdges('B')
+// console.log(graph.hasEdge('A', 'C'));
+graph.removeVertex('C')
+graph.display()
